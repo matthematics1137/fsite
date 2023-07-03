@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">F / SITE</div>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="pages/about/about.html">About</a>
+                    <div class="dropdown-content">
+                        <a href="pages/about/leadership.html">Leadership</a>
+                        <a href="pages/about/overview.html">Overview</a>
+                        <a href="pages/about/research.html">Research</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pages/products/products.html">Products</a>
+                    <div class="dropdown-content">
+                        <a href="pages/products/crypto.html">Crypto</a>
+                        <a href="pages/products/stocks.html">Stocks</a>
+                    </div>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="pages/contact/contact.html">Contact</a>
+                    <div class="dropdown-content">
+                        <a href="pages/contact/careers.html">Careers</a>
+                    </div>
+                </li>
+                <li><a href="https://github.com/matthematics1137" target="_blank"><i class="fab fa-github"></i></a></li>
+            </ul>
+        </nav>
+        <div class="credentials">
+            <button id="signinButton">Sign in</button>
+            <button id="signupButton">Sign up</button>
+        </div>
+    </header>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <div id="dashboard"></div>
+
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign In</h2>
+            <form>
+                <label for="username">Username</label><br>
+                <input type="text" id="username" name="username" placeholder="Enter Username" required><br>
+                <label for="password">Password</label><br>
+                <input type="password" id="password" name="password" placeholder="Enter Password" required><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <p>Please provide helpdesk with account ID for login credentials</p>
+        </div>
+    </div>
+
+
+    <!-- Load the scripts at the bottom -->
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+script.js
+
+// Code related to Three.js
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+var geometry = new THREE.BoxGeometry();
+var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+var cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+camera.position.z = 5;
+
+function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}
+animate();
+
+// Code for interaction
+window.onload = function() {
+    var dropdowns = document.getElementsByClassName('dropdown');
+    for (var i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].addEventListener('mouseover', function() {
+            this.children[1].style.display = 'block';
+            this.children[1].style.opacity = '0';
+            this.children[1].style.transition = 'opacity 0.5s';
+            setTimeout(function() {
+                this.children[1].style.opacity = '1';
+            }.bind(this), 0);
+        });
+        dropdowns[i].addEventListener('mouseout', function() {
+            this.children[1].style.opacity = '0';
+            setTimeout(function() {
+                if (this.children[1].style.opacity === '0') {
+                    this.children[1].style.display = 'none';
+                }
+            }.bind(this), 500);
+        });
+    }
+
+    // Get the modals
+    var signInModal = document.getElementById('signInModal');
+    var signUpModal = document.getElementById('signUpModal');
+
+    // Get the buttons
+    var signInButton = document.getElementById('signinButton');
+    var signUpButton = document.getElementById('signupButton');
+
+    // Get the <span> elements that close the modals
+    // NOTE: This will cause an error if there are no elements with the class 'close' in your modal. Make sure to add them in your HTML.
+    var signInClose = signInModal.getElementsByClassName('close')[0];
+    var signUpClose = signUpModal.getElementsByClassName('close')[0];
+
+    // When the user clicks on the button, open the modal 
+    signInButton.onclick = function() {
+        signInModal.style.display = "block";
+    }
+
+    signUpButton.onclick = function() {
+        signUpModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    signInClose.onclick = function() {
+        signInModal.style.display = "none";
+    }
+
+    signUpClose.onclick = function() {
+        signUpModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == signInModal) {
+            signInModal.style.display = "none";
+        }
+        if (event.target == signUpModal) {
+            signUpModal.style.display = "none";
+        }
+    }
+};
