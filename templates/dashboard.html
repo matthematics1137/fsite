@@ -1,3 +1,7 @@
+{% if 'email' not in session %}
+    <p>You are not authorized to access this page.</p>
+{% else %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +12,7 @@
         <div class="menuLeft__logo">
             <!-- Add your logo here -->
         </div>
-    
+        
         <ul class="menuLeft__navigationPaper">
             <li><a href="#">Link 1</a></li>
             <li><a href="#">Link 2</a></li>
@@ -20,6 +24,7 @@
             <!-- Add your trigger icon here -->
         </div>
     </aside>
-    
+    <a href="/logout">Logout</a>
 </body>
 </html>
+{% endif %}

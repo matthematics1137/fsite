@@ -8,6 +8,9 @@ import hashlib
 import time
 from flask import jsonify
 
+from weaviate import Client
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -64,6 +67,7 @@ def signin():
         return jsonify({'error': 'Incorrect password'})
     
     session['user_id'] = user[0]
+    session['email'] = user[1]
     return jsonify({'success': 'Logged in successfully'})
 
 
@@ -167,7 +171,13 @@ def test_email():
 @app.route('/dashboard')
 def dashboard():
     # Your dashboard logic here
+    client = Client("http://localhost:8080")
     return render_template('dashboard.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('email', None)
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
