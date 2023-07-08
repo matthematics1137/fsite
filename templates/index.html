@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">F / SITE</div>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="pages/about/about.html">About</a>
+                    <div class="dropdown-content">
+                        <a href="pages/about/leadership.html">Leadership</a>
+                        <a href="pages/about/overview.html">Overview</a>
+                        <a href="pages/about/research.html">Research</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pages/products/products.html">Products</a>
+                    <div class="dropdown-content">
+                        <a href="pages/products/crypto.html">Crypto</a>
+                        <a href="pages/products/stocks.html">Stocks</a>
+                    </div>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="pages/contact/contact.html">Contact</a>
+                    <div class="dropdown-content">
+                        <a href="pages/contact/careers.html">Careers</a>
+                    </div>
+                </li>
+                <li><a href="https://github.com/matthematics1137" target="_blank"><i class="fab fa-github"></i></a></li>
+            </ul>
+        </nav>
+        <div class="credentials">
+            <button id="signinButton">Sign in</button>
+            <button id="signupButton">Sign up</button>
+        </div>
+    </header>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <div id="dashboard"></div>
+
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign In</h2>
+            <form id="signin-form" method="post" action="{{ url_for('signin') }}">
+                <label for="email">Email</label><br>
+                <input type="text" id="email" name="email" placeholder="Enter Email" required><br>
+                <label for="password">Password</label><br>
+                <input type="password" id="password" name="password" placeholder="Enter Password" required><br>
+                <div id="signin-error-message" style="color: red;"></div> <!-- Error message will appear here -->
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <form>
+                <label for="email">Email</label><br>
+                <input type="email" id="email" name="email" placeholder="Enter Email" required><br>
+                <button type="button" onclick="send_confirmation_email()">Request Key</button><br>
+            </form>
+            <p>Request Activation Key</p>
+            <p>NOTE: Keys are currently only being provided to pre-approved emails</p>
+            <p>Please contact help desk if you need to request a key</p>
+        </div>
+    </div>
+
+
+    <!-- Load the scripts at the bottom -->
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
