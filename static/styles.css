@@ -179,3 +179,45 @@ header {
 .modal-content form input[type="submit"]:hover {
     background-color: #1e3c72;
 }
+
+#dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#dashboard circle {
+    stroke: #1e3c72; /* Outline color of the circles */
+    stroke-width: 2; /* Outline thickness */
+}
+
+
+.menuLeft {
+    width: 256px;
+    background-color: #your-background-color;
+    color: #your-text-color;
+    padding: 20px;
+}
+
+.menuLeft__logo {
+    /* Style your logo here */
+}
+
+.menuLeft__navigationPaper {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menuLeft__navigationPaper li {
+    margin-bottom: 10px;
+}
+
+.menuLeft__navigationPaper a {
+    color: #your-link-color;
+    text-decoration: none;
+}
+
+.menuLeft__trigger {
+    /* Style your trigger icon here */
+}
